@@ -1,55 +1,57 @@
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
 import pages.components.TableOfDataPage;
+import utils.TestData;
+
 
 public class RegistrationWithPageObjectsTests extends TestBase {
 
     RegistrationPage registrationPage = new RegistrationPage();
     TableOfDataPage tableOfDataPage = new TableOfDataPage();
-
+    TestData testData = new TestData();
 
     @Test
     void successfulRegistrationTest() {
         registrationPage.openPage()
-                .setFirstName("Ivan")
-                .setLastName("Novikov")
-                .setEmail("ivan.example@gmail.com")
-                .setGender("Other")
-                .setUserNumber("1234567890")
-                .setDateOfBirth("30", "July", "2008")
-                .setSubject("Maths")
-                .setHobbies("Sports")
-                .setPicture("imageForTest.jpg")
-                .setAddress("Some address, 12345")
-                .setStateAndCity("Rajasthan", "Jaiselmer")
+                .setFirstName(testData.firstName)
+                .setLastName(testData.lastName)
+                .setEmail(testData.email)
+                .setGender(testData.gender)
+                .setUserNumber(testData.mobileNumber)
+                .setDateOfBirth(testData.dayOfBirth, testData.monthOfBirth, testData.yearOfBirth)
+                .setSubject(testData.subject)
+                .setHobbies(testData.hobbies)
+                .setPicture(testData.picture)
+                .setAddress(testData.address)
+                .setStateAndCity(testData.state, testData.city)
                 .submitPracticeForm();
 
         tableOfDataPage.checkSuccessPageWithTable();
-        tableOfDataPage.checkDataTable("Student Name", "Ivan Novikov");
-        tableOfDataPage.checkDataTable("Student Email", "ivan.example@gmail.com");
-        tableOfDataPage.checkDataTable("Gender", "Other");
-        tableOfDataPage.checkDataTable("Mobile", "1234567890");
-        tableOfDataPage.checkDataTable("Date of Birth", "30 July,2008");
-        tableOfDataPage.checkDataTable("Subjects", "Maths");
-        tableOfDataPage.checkDataTable("Hobbies", "Sports");
-        tableOfDataPage.checkDataTable("Picture", "imageForTest.jpg");
-        tableOfDataPage.checkDataTable("Address", "Some address, 12345");
-        tableOfDataPage.checkDataTable("State and City", "Rajasthan Jaiselmer");
+        tableOfDataPage.checkDataTable("Student Name", testData.firstName + " " + testData.lastName);
+        tableOfDataPage.checkDataTable("Student Email", testData.email);
+        tableOfDataPage.checkDataTable("Gender", testData.gender);
+        tableOfDataPage.checkDataTable("Mobile", testData.mobileNumber);
+        tableOfDataPage.checkDataTable("Date of Birth", testData.dayOfBirth + " " + testData.monthOfBirth + "," + testData.yearOfBirth);
+        tableOfDataPage.checkDataTable("Subjects", testData.subject);
+        tableOfDataPage.checkDataTable("Hobbies", testData.hobbies);
+        tableOfDataPage.checkDataTable("Picture", testData.picture);
+        tableOfDataPage.checkDataTable("Address", testData.address);
+        tableOfDataPage.checkDataTable("State and City", testData.state + " " + testData.city);
     }
 
     @Test
     void negativeEmailTest() {
         registrationPage.openPage()
-                .setFirstName(" ")
-                .setLastName(" ")
-                .setEmail("email")
-                .setGender("Female")
-                .setUserNumber("1234567890")
-                .setDateOfBirth("12","July", "2023")
-                .setSubject("Maths")
-                .setPicture("imageForTest.jpg")
-                .setStateAndCity("Rajasthan", "Jaiselmer")
-                .setHobbies("Sports")
+                .setFirstName(testData.firstName)
+                .setLastName(testData.lastName)
+                .setEmail(testData.email)
+                .setGender(testData.gender)
+                .setUserNumber(testData.mobileNumber)
+                .setDateOfBirth(testData.dayOfBirth, testData.monthOfBirth, testData.yearOfBirth)
+                .setSubject(testData.subject)
+                .setPicture(testData.picture)
+                .setStateAndCity(testData.state, testData.city)
+                .setHobbies(testData.hobbies)
                 .submitPracticeForm();
 
         registrationPage.checkUnsuccessPageWithTable();
@@ -58,18 +60,18 @@ public class RegistrationWithPageObjectsTests extends TestBase {
     @Test
     void minDataTest() {
         registrationPage.openPage()
-                .setFirstName("Ivan")
-                .setLastName("Novikov")
-                .setGender("Male")
-                .setEmail("ivan.example@gmail.com")
-                .setUserNumber("8999999999")
+                .setFirstName(testData.firstName)
+                .setLastName(testData.lastName)
+                .setGender(testData.gender)
+                .setEmail(testData.email)
+                .setUserNumber(testData.mobileNumber)
                 .submitPracticeForm();
 
         tableOfDataPage.checkSuccessPageWithTable();
-        tableOfDataPage.checkDataTable("Student Name","Ivan Novikov");
-        tableOfDataPage.checkDataTable("Student Email","ivan.example@gmail.com");
-        tableOfDataPage.checkDataTable("Gender","Male");
-        tableOfDataPage.checkDataTable("Mobile","8999999999");
+        tableOfDataPage.checkDataTable("Student Name", testData.firstName + " " + testData.lastName);
+        tableOfDataPage.checkDataTable("Student Email", testData.email);
+        tableOfDataPage.checkDataTable("Gender",testData.gender);
+        tableOfDataPage.checkDataTable("Mobile", testData.mobileNumber);
 
     }
 }
