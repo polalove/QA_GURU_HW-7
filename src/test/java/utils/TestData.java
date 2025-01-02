@@ -1,6 +1,7 @@
 package utils;
 
 import com.github.javafaker.Faker;
+
 import java.util.Locale;
 
 public class TestData {
@@ -20,9 +21,9 @@ public class TestData {
     public String picture = faker.options().option("imageForTest.jpg", "secondImageForTest.jpg", "thirdImageForTest.jpg");
     public String address = faker.address().fullAddress();
     public String state = faker.options().option("NCR", "Uttar Pradesh", "Haryana", "Rajasthan");
-    public String city = getStateAndCity(state);
+    public String city = getCity(state);
 
-    public String getStateAndCity(String state) {
+    public String getCity(String state) {
         return switch (state) {
             case "NCR" -> faker.options().option("Delhi", "Gurgaon", "Noida");
             case "Uttar Pradesh" -> faker.options().option("Agra", "Lucknow", "Merrut");

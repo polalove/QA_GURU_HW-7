@@ -70,7 +70,7 @@ public class RegistrationWithPageObjectsTests extends TestBase {
         tableOfDataPage.checkSuccessPageWithTable();
         tableOfDataPage.checkDataTable("Student Name", testData.firstName + " " + testData.lastName);
         tableOfDataPage.checkDataTable("Student Email", testData.email);
-        tableOfDataPage.checkDataTable("Gender",testData.gender);
+        tableOfDataPage.checkDataTable("Gender", testData.gender);
         tableOfDataPage.checkDataTable("Mobile", testData.mobileNumber);
 
     }
