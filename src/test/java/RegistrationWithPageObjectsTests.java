@@ -1,8 +1,11 @@
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
 import pages.components.TableOfDataPage;
 import utils.TestData;
+
+import static io.qameta.allure.Allure.step;
 
 @Tag("Simple")
 public class RegistrationWithPageObjectsTests extends TestBase {
@@ -12,37 +15,41 @@ public class RegistrationWithPageObjectsTests extends TestBase {
     TestData testData = new TestData();
 
     @Test
+    @DisplayName("Filling out the authorization form")
     @Tag("simple")
     void successfulRegistrationTest() {
-        registrationPage.openPage()
-                .setFirstName(testData.firstName)
-                .setLastName(testData.lastName)
-                .setEmail(testData.email)
-                .setGender(testData.gender)
-                .setUserNumber(testData.mobileNumber)
-                .setDateOfBirth(testData.dayOfBirth, testData.monthOfBirth, testData.yearOfBirth)
-                .setSubject(testData.subject)
-                .setHobbies(testData.hobbies)
-                .setPicture(testData.picture)
-                .setAddress(testData.address)
-                .setStateAndCity(testData.state, testData.city)
-                .submitPracticeForm();
+        step("Fill form", () -> {
+            registrationPage.openPage()
+                    .setFirstName(testData.firstName)
+                    .setLastName(testData.lastName)
+                    .setEmail(testData.email)
+                    .setGender(testData.gender)
+                    .setUserNumber(testData.mobileNumber)
+                    .setDateOfBirth(testData.dayOfBirth, testData.monthOfBirth, testData.yearOfBirth)
+                    .setSubject(testData.subject)
+                    .setHobbies(testData.hobbies)
+                    .setPicture(testData.picture)
+                    .setAddress(testData.address)
+                    .setStateAndCity(testData.state, testData.city)
+                    .submitPracticeForm();
+        });
 
-        tableOfDataPage.checkSuccessPageWithTable();
-        tableOfDataPage.checkDataTable("Student Name", testData.firstName + " " + testData.lastName);
-        tableOfDataPage.checkDataTable("Student Email", testData.email);
-        tableOfDataPage.checkDataTable("Gender", testData.gender);
-        tableOfDataPage.checkDataTable("Mobile", testData.mobileNumber);
-        tableOfDataPage.checkDataTable("Date of Birth", testData.dayOfBirth + " " + testData.monthOfBirth + "," + testData.yearOfBirth);
-        tableOfDataPage.checkDataTable("Subjects", testData.subject);
-        tableOfDataPage.checkDataTable("Hobbies", testData.hobbies);
-        tableOfDataPage.checkDataTable("Picture", testData.picture);
-        tableOfDataPage.checkDataTable("Address", testData.address);
-        tableOfDataPage.checkDataTable("State and City", testData.state + " " + testData.city);
+        step("Verify results", () -> {
+            tableOfDataPage.checkSuccessPageWithTable();
+            tableOfDataPage.checkDataTable("Student Name", testData.firstName + " " + testData.lastName);
+            tableOfDataPage.checkDataTable("Student Email", testData.email);
+            tableOfDataPage.checkDataTable("Gender", testData.gender);
+            tableOfDataPage.checkDataTable("Mobile", testData.mobileNumber);
+            tableOfDataPage.checkDataTable("Date of Birth", testData.dayOfBirth + " " + testData.monthOfBirth + "," + testData.yearOfBirth);
+            tableOfDataPage.checkDataTable("Subjects", testData.subject);
+            tableOfDataPage.checkDataTable("Hobbies", testData.hobbies);
+            tableOfDataPage.checkDataTable("Picture", testData.picture);
+            tableOfDataPage.checkDataTable("Address", testData.address);
+            tableOfDataPage.checkDataTable("State and City", testData.state + " " + testData.city);
+        });
     }
 
     @Test
-    @Tag("simple")
     void negativeEmailTest() {
         registrationPage.openPage()
                 .setFirstName(testData.firstName)
@@ -61,7 +68,6 @@ public class RegistrationWithPageObjectsTests extends TestBase {
     }
 
     @Test
-    @Tag("simple")
     void minDataTest() {
         registrationPage.openPage()
                 .setFirstName(testData.firstName)
