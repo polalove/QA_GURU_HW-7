@@ -12,6 +12,7 @@ public class RegistrationWithPageObjectsTests extends TestBase {
     TestData testData = new TestData();
 
     @Test
+    @Tag("simple")
     void successfulRegistrationTest() {
         registrationPage.openPage()
                 .setFirstName(testData.firstName)
@@ -41,6 +42,7 @@ public class RegistrationWithPageObjectsTests extends TestBase {
     }
 
     @Test
+    @Tag("simple")
     void negativeEmailTest() {
         registrationPage.openPage()
                 .setFirstName(testData.firstName)
@@ -59,6 +61,7 @@ public class RegistrationWithPageObjectsTests extends TestBase {
     }
 
     @Test
+    @Tag("simple")
     void minDataTest() {
         registrationPage.openPage()
                 .setFirstName(testData.firstName)
