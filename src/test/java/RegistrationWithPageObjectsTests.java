@@ -7,7 +7,6 @@ import utils.TestData;
 
 import static io.qameta.allure.Allure.step;
 
-@Tag("Simple")
 public class RegistrationWithPageObjectsTests extends TestBase {
 
     RegistrationPage registrationPage = new RegistrationPage();
