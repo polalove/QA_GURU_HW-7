@@ -15,9 +15,7 @@ dependencies {
             'com.github.javafaker:javafaker:1.0.2',
             'io.qameta.allure:allure-selenide:2.27.0'
     )
-    runtimeOnly 'org.aspectj:aspectjweaver:1.9.22.1'
 }
-
 
 allure {
     report {
@@ -32,13 +30,10 @@ allure {
         }
     }
 }
+
 compileJava {
     options.encoding = 'UTF-8'
 }
-compileTestJava {
-    options.encoding = 'UTF-8'
-}
-
 
 tasks.withType(Test) {
     systemProperties(System.getProperties())
